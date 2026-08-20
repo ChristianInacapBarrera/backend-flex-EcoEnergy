@@ -18,3 +18,12 @@ def dispositivos_zona(request, zona_id):
     return HttpResponse( 
         f"Dispositivos de la zona {zona_id}"
     )
+    
+def dispositivos_id(request, dispositivo_id):
+    if dispositivo_id != 10:
+        return HttpResponse(
+            "Dispositivo inexistente", status=404
+        )
+    return HttpResponse(
+        f"Dispositivo {dispositivo_id} encontrado."
+    )

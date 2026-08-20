@@ -3,6 +3,7 @@ from . import views
 app_name = "dispositivos"
 urlpatterns = [
     path("", views.inicio, name="inicio"),
-    path("zonas/<int:zona_id>/dispositivos/", views.dispositivos_zona, name="por_zona")    
+    path("zonas/<int:zona_id>/dispositivos/", views.dispositivos_zona, name="por_zona"),
+    path("dispositivos/<int:dispositivo_id>/", views.dispositivos_id)
     ]
 
