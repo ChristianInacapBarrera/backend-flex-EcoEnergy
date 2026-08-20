@@ -27,3 +27,27 @@ def dispositivos_id(request, dispositivo_id):
     return HttpResponse(
         f"Dispositivo {dispositivo_id} encontrado."
     )
+    
+def inicio(request):
+    contexto = {
+        "sistema": "EcoEnergy",
+        "mensaje": "Monitoreo energico responsable",
+        "asignatura": "Programación Back End",
+    }
+    return render(
+        request,
+        "dispositivos/inicio.html",
+        contexto,
+    )
+    
+def catalogo(request):
+    dispositivos = [
+        {"nombre":"Medidor inteligente", "estado": "Activo"},
+        {"nombre":"Sensor de temperatura", "estado": "Activo"},
+        {"nombre":"Climatizador", "estado": "Revisión"}
+    ]
+    return render(
+        request,
+        "dispositivos/catalogo.html",
+        {"dispositivos": dispositivos},
+    )
