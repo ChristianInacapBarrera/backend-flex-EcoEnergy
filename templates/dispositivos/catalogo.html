@@ -3,11 +3,12 @@
 {% block title %}Dispositivos | EcoEnergy{% endblock %}
 {% block content %}
     <h1>Dispositivos</h1>
-    <ul>
-        {% for dispositivo in dispositivos %}
-            <li>{{ dispositivo.nombre }} — {{ dispositivo.estado }}</li>
-        {% empty %}
-            <li>No existen dispositivos disponibles.</li>
-        {% endfor %}
-    </ul>
+    <p>Total: {{total}} | Activos {{total_activos}} </p>
+    {% for dispositivo in dispositivos %}
+        <p> {{ dispositivo.nombre }} -
+            {{ dispositivo.consumo_kwh }} -
+            {{ dispositivo.estado }}</p>
+    {% empty %}
+        <p>No existen dispositivos disponibles.</p>
+    {% endfor %}
 {% endblock %}
