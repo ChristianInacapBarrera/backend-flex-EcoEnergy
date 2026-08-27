@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "nombre": "Medición",
+        "descripcion": "Dispositivos utilizados para medir y monitorear el consumo energético."
+    },
+    {
+        "id": 2,
+        "nombre": "Climatización",
+        "descripcion": "Dispositivos destinados a regular la temperatura y climatizar los espacios."
+    },
+    {
+        "id": 3,
+        "nombre": "Iluminación",
+        "descripcion": "Dispositivos utilizados para proporcionar iluminación en diferentes zonas."
+    },
+    {
+        "id": 4,
+        "nombre": "Electrodomésticos",
+        "descripcion": "Equipos eléctricos utilizados para realizar tareas domésticas y de uso cotidiano."
+    }
+]
