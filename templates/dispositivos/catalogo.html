@@ -3,12 +3,31 @@
 {% block title %}Dispositivos | EcoEnergy{% endblock %}
 {% block content %}
     <h1>Dispositivos</h1>
-    <p>Total: {{total}} | Activos {{total_activos}} </p>
-    {% for dispositivo in dispositivos %}
-        <p> {{ dispositivo.nombre }} -
-            {{ dispositivo.consumo_kwh }} -
-            {{ dispositivo.estado }}</p>
-    {% empty %}
-        <p>No existen dispositivos disponibles.</p>
-    {% endfor %}
+    <p>Total de dispositivos: {{ total }}</p>
+    {% if dispositivos %}
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Dispositivo</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col" class="text-end">Consumo kWh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dispositivo in dispositivos %}
+                        <tr>
+                            <td>{{ dispositivo.nombre }}</td>
+                            <td>{{ dispositivo.categoria }}</td>
+                            <td class="text-end">{{ dispositivo.consumo_kwh }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No existen dispositivos disponibles.
+        </div>
+    {% endif %}
 {% endblock %}

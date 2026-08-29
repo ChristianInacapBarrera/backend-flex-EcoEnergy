@@ -6,17 +6,39 @@
 <head>
     {% bootstrap_css %}
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}EcoEnergy{% endblock %}</title>
 </head>
-<body class="container py-4">
+<body class="bg-light">
 
-    
-    <nav>
-        <a href="{% url 'dispositivos:inicio' %}">Inicio</a>
-        <a href="{% url 'dispositivos:catalogo' %}">Dispositivos</a>
-        
-    </nav>
-    <main>{% block content %}{% endblock %}</main>
+    <header class="bg-white border-bottom mb-4">
+        <nav class="navbar navbar-expand-lg container">
+            <a class="navbar-brand fw-bold" href="{% url 'dispositivos:inicio' %}">ECoEnergy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navPrincipal" aria-controls="navPrincipal"
+                    aria-expanded="false" aria-label="Abrir navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navPrincipal">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dispositivos:inicio' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dispositivos:zonas' %}">Zonas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dispositivos:catalogo' %}">Dispositivos</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-2">
+        {% block content %}{% endblock %}
+    </main>
+
 {% bootstrap_javascript %}
 </body>
 </html>

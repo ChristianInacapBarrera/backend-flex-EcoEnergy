@@ -1,0 +1,84 @@
+<!-- templates/dispositivos/zona_detalle.html -->
+{% extends "base.html" %}
+{% block title %}Detalle de zona | EcoEnergy{% endblock %}
+{% block content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dispositivos:zonas' %}">Zonas</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ zona.nombre }}
+            </li>
+        </ol>
+    </nav>
+
+    <h1>Detalle de zona: {{ zona.nombre }}</h1>
+
+    <div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <p class="card-text text-muted mb-1">Límite</p>
+                    <p class="card-text fs-4 mb-0">{{ zona.limite_kwh }} kWh</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <p class="card-text text-muted mb-1">Consumo total</p>
+                    <p class="card-text fs-4 mb-0">{{ consumo_total }} kWh</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <p class="card-text text-muted mb-1">Dispositivos</p>
+                    <p class="card-text fs-4 mb-0">{{ cantidad_dispositivos }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <p class="card-text text-muted mb-1">Estado</p>
+                    {% if estado == "ALERTA" %}
+                        <span class="badge bg-danger">&#9888; ALERTA</span>
+                    {% else %}
+                        <span class="badge bg-success">&#10003; NORMAL</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="h4">Dispositivos de la zona</h2>
+    {% if dispositivos %}
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Dispositivo</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col" class="text-end">Consumo kWh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dispositivo in dispositivos %}
+                        <tr>
+                            <td>{{ dispositivo.nombre }}</td>
+                            <td>{{ dispositivo.categoria }}</td>
+                            <td class="text-end">{{ dispositivo.consumo_kwh }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Esta zona no tiene dispositivos.
+        </div>
+    {% endif %}
+{% endblock %}

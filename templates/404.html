@@ -1,0 +1,21 @@
+<!-- templates/404.html -->
+{% extends "base.html" %}
+{% block title %}Zona no encontrada | EcoEnergy{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card border-warning">
+                <div class="card-body">
+                    <h1 class="card-title h4">&#9888; Zona no encontrada</h1>
+                    <p class="card-text">
+                        La zona solicitada no existe o no está disponible.
+                    </p>
+                    <a class="btn btn-primary"
+                       href="{% url 'dispositivos:zonas' %}">
+                        Volver al listado de zonas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

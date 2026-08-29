@@ -1,90 +1,83 @@
 from django.shortcuts import render
-from .services import cargar_dispositivos
-# Create your views here.
 
-from django.http import HttpResponse
-"""def inicio(request): #Forma basica de mostrar contenido
-    return HttpResponse(
-        "<h1>EcoEnergy</h1>"
-        "<p>Back End en funcionamiento</p>"
-        )"""
-    
-#Esats funciones dirigen que mostrar
+from .services import (
+    cantidad_dispositivos,
+    cargar_dispositivos,
+    cargar_zonas,
+    consumo_total_zona,
+    estado_zona,
+    obtener_categoria,
+    obtener_zona,
+)
 
-# dispositivos/views.py 
-def dispositivos_zona(request, zona_id): #clase 3
-    if zona_id != 3:
-        return HttpResponse(
-            "Zona no encontrada", status=404
-        )
-    return HttpResponse( 
-        f"Dispositivos de la zona {zona_id}"
-    )
-    
-def dispositivos_id(request, dispositivo_id): #implementacion autonoma
-    if dispositivo_id == 10:
-        context2 = {"mensaje": f"Dispositivo {dispositivo_id} inexistente"}
-    else:
-        context2= {"mensaje": f"Dispositivo {dispositivo_id} encontrado."}
-    
-    
-    return render(
-        request,
-        "dispositivos/dispositivo.html",
-        context2,
-    )
-    
+
 def inicio(request):
     contexto = {
         "sistema": "EcoEnergy",
-        "mensaje": "Monitoreo energico responsable",
+        "mensaje": "Monitoreo energético responsable",
         "asignatura": "Programación Back End",
     }
-    return render(
-        request,
-        "dispositivos/inicio.html",
-        contexto,
-    )
-    
-def catalogo(request):
-    dispositivos = [
-        {"nombre":"Medidor inteligente", "estado": "Activo"},
-        {"nombre":"Sensor de temperatura", "estado": "Activo"},
-        {"nombre":"Climatizador", "estado": "Revisión"}
-    ]
-    return render(
-        request,
-        "dispositivos/catalogo.html",
-        {"dispositivos": dispositivos},
-    )
-    
+    return render(request, "dispositivos/inicio.html", contexto)
+
+
+def listar_zonas(request):
+    zonas = []
+    for zona in cargar_zonas():
+        zona_id = zona["id"]
+        zonas.append(
+            {
+                "id": zona_id,
+                "nombre": zona["nombre"],
+                "limite_kwh": zona["limite_kwh"],
+                "cantidad_dispositivos": cantidad_dispositivos(zona_id),
+                "consumo_total": consumo_total_zona(zona_id),
+                "estado": estado_zona(
+                    consumo_total_zona(zona_id), zona["limite_kwh"]
+                ),
+            }
+        )
+    return render(request, "dispositivos/zonas.html", {"zonas": zonas})
+
+
+def detalle_zona(request, zona_id):
+    zona = obtener_zona(zona_id)
+    if zona is None:
+        return render(request, "404.html", status=404)
+
+    dispositivos = []
+    for dispositivo in cargar_dispositivos():
+        if dispositivo["zona_id"] == zona_id:
+            dispositivos.append(
+                {
+                    "nombre": dispositivo["nombre"],
+                    "consumo_kwh": dispositivo["consumo_kwh"],
+                    "categoria": obtener_categoria(dispositivo["categoria_id"]),
+                }
+            )
+
+    consumo_total = consumo_total_zona(zona_id)
+    contexto = {
+        "zona": zona,
+        "dispositivos": dispositivos,
+        "consumo_total": consumo_total,
+        "cantidad_dispositivos": len(dispositivos),
+        "estado": estado_zona(consumo_total, zona["limite_kwh"]),
+    }
+    return render(request, "dispositivos/zona_detalle.html", contexto)
+
 
 def catalogo(request):
-    dispositivos = cargar_dispositivos()
-    
-    activos = sum(
-        1 for item in dispositivos
-        if item["estado"] == "Activo"
-    )
-    
+    dispositivos = []
+    for dispositivo in cargar_dispositivos():
+        dispositivos.append(
+            {
+                "nombre": dispositivo["nombre"],
+                "consumo_kwh": dispositivo["consumo_kwh"],
+                "categoria": obtener_categoria(dispositivo["categoria_id"]),
+            }
+        )
     contexto = {
         "dispositivos": dispositivos,
         "total": len(dispositivos),
-        "total_activos": activos,
     }
-    
-    return render(
-        request, "dispositivos/catalogo.html", contexto
-    )
-    
-
-
-
-
-
-
-
-
-
-
-
+    return render(request, "dispositivos/catalogo.html", contexto)
