@@ -18,5 +18,10 @@
         "id": 4,
         "nombre": "Zona 4",
         "limite_kwh": 50
+    },
+    {
+        "id": 5,
+        "nombre": "Zona 5",
+        "limite_kwh": 20
     }
 ]

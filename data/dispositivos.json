@@ -54,5 +54,12 @@
         "consumo_kwh": 28.9,
         "zona_id": 4,
         "categoria_id": 4
+    },
+    {
+        "id": 9,
+        "nombre": "Sistema solar",
+        "consumo_kwh": 38.9,
+        "zona_id": 1,
+        "categoria_id": 4
     }
 ]
