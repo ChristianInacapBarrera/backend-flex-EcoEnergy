@@ -63,3 +63,39 @@ def estado_zona(consumo_total, limite_kwh):
 
 def cantidad_dispositivos(zona_id):
     return len(dispositivos_por_zona(zona_id))
+
+
+def estado_zonas_resumen(consumo_total, limite_kwh):
+    if consumo_total > limite_kwh:
+        return "LÍMITE SUPERADO"
+    return "DENTRO DEL LÍMITE"
+
+
+def resumen_zonas():
+    resumenes = []
+    total_dispositivos = 0
+    total_consumo = 0.0
+
+    for zona in cargar_zonas():
+        dispositivos = dispositivos_por_zona(zona["id"])
+        cantidad = len(dispositivos)
+        consumo = consumo_total_zona(zona["id"])
+        total_dispositivos += cantidad
+        total_consumo += consumo
+        resumenes.append(
+            {
+                "id": zona["id"],
+                "nombre": zona["nombre"],
+                "cantidad_dispositivos": cantidad,
+                "consumo_total": consumo,
+                "limite_kwh": zona["limite_kwh"],
+                "estado": estado_zonas_resumen(consumo, zona["limite_kwh"]),
+            }
+        )
+
+    totales = {
+        "total_zonas": len(cargar_zonas()),
+        "total_dispositivos": total_dispositivos,
+        "total_consumo": total_consumo,
+    }
+    return resumenes, totales

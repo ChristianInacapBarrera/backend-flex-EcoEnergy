@@ -206,11 +206,6 @@ Dentro de la tabla, por ejemplo:
 
 > Reutiliza íconos/badges como ya hace `zona_detalle.html`.
 
-### Paso 5 · Pruebas automatizadas (opcional, valor añadido) (`dispositivos/tests.py`)
-
-Puedes agregar tests que cubran los escenarios de la sección 5 del enunciado,
-llamando a `services` y a las vistas con datos temporales. (No es obligatorio pero
-ayuda a la verificación.)
 
 ---
 
@@ -261,29 +256,3 @@ Antes de dar por terminada la tarea:
 5. Vaciar los dispositivos de una zona (p. ej. Zona 5) → fila con 0 / 0 / DENTRO DEL LÍMITE.
 6. Probar un caso sobre el límite y uno bajo el límite → texto/color correctos.
 
----
-
-## 8. Commits y entrega (para el estudiante en la sesión)
-
-1. Realiza **al menos 2 commits nuevos y progresivos** durante la Fase 2, con mensajes
-   descriptivos. Ejemplos válidos:
-   - `"Agrega servicios y vista de resumen de consumo por zona"`
-   - `"Implementa template de resumen de zonas y enlace en navegación"`
-   - `"Corrige estados de resumen según regla de negocio Fase 2"`
-   - `"Agrega pruebas de escenarios para /resumen-zonas/"`
-2. El **último commit** debe usar exactamente: **`Entrega fase 2 evaluacion unidad 1`**.
-3. `git push origin main`.
-4. Entregar en el Ambiente de Aprendizaje la **URL del repositorio** y el **hash completo**
-   del último commit.
-5. No incluir `.venv/`, credenciales ni archivos personales.
-
----
-
-## 9. Nota ética importante (para el estudiante)
-
-La Fase 2 se rige por las **condiciones de aplicación** del enunciado: es **individual,
-sin IA y sin código de terceros**. Este `PLAN_IMPLEMENTACION_2.md` es material de
-estudio/preparación previa. Durante la sesión oficial el estudiante debe **implementar
-y explicar por sí mismo** el código, responder la verificación escrita y firmar la
-declaración de entrega. Si el docente lo solicita, debe poder demostrar autoría y
-comprensión sin depender de este plan.

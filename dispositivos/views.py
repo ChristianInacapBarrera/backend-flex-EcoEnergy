@@ -8,6 +8,7 @@ from .services import (
     estado_zona,
     obtener_categoria,
     obtener_zona,
+    resumen_zonas as construir_resumen_zonas,
 )
 
 
@@ -81,3 +82,12 @@ def catalogo(request):
         "total": len(dispositivos),
     }
     return render(request, "dispositivos/catalogo.html", contexto)
+
+
+def resumen_zonas(request):
+    resumenes, totales = construir_resumen_zonas()
+    contexto = {
+        "resumenes": resumenes,
+        "totales": totales,
+    }
+    return render(request, "dispositivos/resumen_zonas.html", contexto)
